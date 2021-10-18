@@ -55,7 +55,7 @@ namespace AoC2017_06
             }
             catch (System.Exception)
             {
-                if(Step2)
+                if (Step2)
                 {
                     var lastSeen = uniqueBankConfigs[getConfigString(bankData)];
                     return numRedistCycles - lastSeen;
