@@ -23,7 +23,7 @@ namespace AoC2017_03Tests
             // Prepare
             AoC201703 processor = new AoC201703();
             int result;
-            result = processor.Step1(input);
+            result = processor.Process(input);
             result.ShouldBe(output);
         }
     }
