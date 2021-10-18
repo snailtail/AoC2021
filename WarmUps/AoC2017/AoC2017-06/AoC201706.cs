@@ -12,8 +12,6 @@ namespace AoC2017_06
             int numRedistCycles = 1;
             int[] bankData = bankSetup.Split().Select(s => int.Parse(s)).ToArray();
             int numBanks = bankData.Length;
-
-            // loop around this probably
             try
             {
                 string configString = getConfigString(bankData);
@@ -21,13 +19,10 @@ namespace AoC2017_06
 
                 while (true)
                 {
-                    Console.WriteLine($"Processing round {numRedistCycles}");
                     //First occurence (if more than 1) of the max value will be used.
                     int pos = 0;
                     int amountToDistribute = 0;
                     int maxValue = bankData.Max();
-                    Console.WriteLine($"maxValue: {maxValue}");
-
                     for (int n = 0; n < numBanks; n++)
                     {
                         if (bankData[n] == maxValue)
@@ -40,9 +35,8 @@ namespace AoC2017_06
                             break;
                         }
                     }
-                    //now process all the occurences, from pos and forward.
+                    //now process all the occurences, from pos and forward. -> wrap around to the beginning if needed.
                     #region distribute
-                    //Console.WriteLine($"Amount to distribute: {amountToDistribute} - config={getConfigString(bankData)}");
                     while (amountToDistribute > 0)
                     {
                         pos += 1;
@@ -52,7 +46,6 @@ namespace AoC2017_06
                         }
                         bankData[pos] += 1;
                         amountToDistribute--;
-                        //Console.WriteLine($"bankdata[{pos}]={bankData[pos]}, amountToDistribute={amountToDistribute}  - config={getConfigString(bankData)}");
                     }
                     configString = getConfigString(bankData);
                     uniqueBankConfigs.Add(configString, numRedistCycles);
