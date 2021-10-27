@@ -50,7 +50,7 @@ namespace AoC2017_08
     {
         static void Main(string[] args)
         {
-            var step1 = AoC201708.fileReader("sample.txt");
+            var step1 = AoC201708.fileReader("input.txt");
             Instruction instr;
             foreach(var line in step1)
             {
