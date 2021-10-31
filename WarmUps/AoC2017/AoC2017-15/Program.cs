@@ -19,7 +19,6 @@ namespace AoC2017_15
             factor = Factor;
             divisor = Divisor;
             modFactor = ModFactor;
-            //lastResultBinary = binHelper.ConvertLongToBinaryString(lastResult, 32);
         }
         public string Process()
         {
@@ -65,9 +64,7 @@ namespace AoC2017_15
                 if (binA == binB)
                 {
                     hitCount++;
-                    Console.WriteLine($"A: {binA} - B: {binB}");
                 }
-                //Console.WriteLine($"A: {genA.lastResult} | B: {genB.lastResult}");
             }
             Console.WriteLine($"Step 1: {hitCount}");
             
@@ -83,7 +80,6 @@ namespace AoC2017_15
                 string resultA = genA.Process();
                 if (resultA != null)
                 {
-                    //Console.WriteLine(genA.lastResult);
                     resultsA.Add(resultA);
                 }
             } while (resultsA.Count < step2Runs);
@@ -93,7 +89,6 @@ namespace AoC2017_15
                 string resultB = genB.Process();
                 if (resultB != null)
                 {
-                    //Console.WriteLine(genB.lastResult);
                     resultsB.Add(resultB);
                 }
             } while (resultsB.Count < step2Runs);
@@ -104,7 +99,6 @@ namespace AoC2017_15
                 string binB = resultsB[n].Substring(resultsB[n].Length - 16, 16);
                 if (binA == binB)
                 {
-                    //Console.WriteLine($"{resultsA[n]} - {resultsB[n]}");
                     hitCount++;
                 }
 
