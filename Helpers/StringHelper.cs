@@ -1,5 +1,7 @@
 using System;
 
+namespace AdventOfCode.Helpers
+{
 public class StringHelper
 {
     /// <summary>
@@ -13,4 +15,5 @@ public class StringHelper
         Array.Sort<char>(charArray);
         return new string(charArray);
     }
+}
 }
