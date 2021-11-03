@@ -6,7 +6,6 @@ namespace AoC2018_02
 {
     public class Inventoryizer
     {
-
         string ValidCharacters = "abcdefghijklmnopqrstuvwxyz";
 
         public bool CheckCharCount(int charCount, string theString)
@@ -53,7 +52,6 @@ namespace AoC2018_02
                 for (int y = x + 1; y < IDs.Length; y++)
                 {
                     int l1 = Levenshtein.LevenshteinDistance(IDs[x], IDs[y]);
-                    //Console.WriteLine($"{IDs[x]} -> {IDs[y]} = {l1}");
                     if (l1 == 1)
                     {
                         step2 = GetMatchingCharacters(IDs[x], IDs[y]);
