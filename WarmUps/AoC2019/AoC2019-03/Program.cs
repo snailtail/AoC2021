@@ -4,12 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using AdventOfCode.Helpers;
 
-namespace AoC2018_03
+namespace AoC2019_03
 {
-
     class Program
     {
-
         private static FourWayMap fwMap1 = new FourWayMap();
         private static FourWayMap fwMap2 = new FourWayMap();
 
