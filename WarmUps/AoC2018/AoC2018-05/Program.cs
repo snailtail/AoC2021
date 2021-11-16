@@ -1,44 +1,55 @@
-﻿using System.Text.RegularExpressions;
-using System.IO;
-
-namespace AoC2018_05
+﻿namespace AoC2018_05
 {
     class AoC201805
     {
         public static void Main(string[] args)
         {
-
-            bool loopCondition = true;
-            var regex = getRegex();
-            var myRegex = new Regex(regex);
-
-            //string input = "dabAcCaCBAcCcaDA";
             string input = File.ReadAllText("input.txt");
-
-            while (loopCondition)
-            {
-                var match = myRegex.Match(input);
-                //Console.WriteLine($"Found {match.Value}");
-                loopCondition = match.Success;
-                //how to loop
-                input = myRegex.Replace(input, "", 1);
-                //Console.WriteLine($"Input is now: {input}");
-            }
-            Console.WriteLine(input.Length);
+            Console.WriteLine($"Step 1: {ReactPolymers(input)}");
+            Console.WriteLine($"Step 2: {Step2(input)}");
         }
 
-        private static string getRegex()
+        private static int ReactPolymers(string Input)
         {
-            string originChars = "abcdefghijklmnopqrstuvwxyz";
-            string regEx = string.Empty;
-            foreach (char ch in originChars)
+            var stack = new Stack<char>();
+            foreach (var c in Input)
             {
-                var temp = ch.ToString().ToUpper();
-                regEx += $"{ch}{temp}|{temp}{ch}|";
+                if (stack.Count == 0)
+                {
+                    stack.Push(c);
+                }
+                else
+                {
+                    var inStack = stack.Peek();
+                    var same = c != inStack && char.ToUpper(c) == char.ToUpper(inStack);
+                    if (same)
+                    {
+                        stack.Pop();
+                    }
+                    else
+                    {
+                        stack.Push(c);
+                    }
+                }
             }
-            regEx = regEx.Substring(0, regEx.Length - 1);
-            regEx = $"({regEx})";
-            return regEx;
+            return stack.Count;
+        }
+
+        private static int Step2(string Input)
+        {
+            int minValue = int.MaxValue;
+
+            string originChars = "abcdefghijklmnopqrstuvwxyz";
+            foreach(var ch in originChars)
+            {
+                var testString = Input.Replace(ch.ToString(),"").Replace(ch.ToString().ToUpper(),"");
+                var testValue = ReactPolymers(testString);
+                if(testValue < minValue)
+                {
+                    minValue=testValue;
+                }
+            }
+            return minValue;
         }
     }
 }
