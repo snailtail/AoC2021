@@ -14,4 +14,5 @@ dotnet add package Shouldly
 dotnet restore
 cd ../..
 git add .
-#git commit -m "Add new day $1"
+git commit -m "Add new day $1"
+git push --set-upstream origin day/$1
