@@ -4,7 +4,6 @@ namespace AdventOfCode.Y2021
 {
     public class Measurementizer
     {
-
         private int[] measurements;
         public Measurementizer(string[] measurementStrings)
         {
@@ -16,15 +15,11 @@ namespace AdventOfCode.Y2021
             get
             {
                 int counter = 0;
-
                 for (int n = 0; n < measurements.Length; n++)
                 {
-                    if (n + 1 < measurements.Length)
+                    if (n + 1 < measurements.Length && measurements[n + 1] > measurements[n])
                     {
-                        if (measurements[n + 1] > measurements[n])
-                        {
                             counter++;
-                        }
                     }
                 }
                 return counter;
@@ -39,14 +34,12 @@ namespace AdventOfCode.Y2021
                 int lastsum = 0;
                 for (int n = 0; n < measurements.Length - 2; n++)
                 {
-                    if (n > 0)
+                    int sum=(measurements[n] + measurements[n + 1] + measurements[n + 2]);
+                    if (n > 0 && sum > lastsum)
                     {
-                        if ((measurements[n] + measurements[n + 1] + measurements[n + 2]) > lastsum)
-                        {
                             counter++;
-                        }
                     }
-                    lastsum = (measurements[n] + measurements[n + 1] + measurements[n + 2]);
+                    lastsum = sum;
                 }
                 return counter;
             }
