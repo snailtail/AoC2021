@@ -49,7 +49,6 @@
             return sum;
         }
 
-
         private static void resetFishAgeGroups()
         {
             fishAgeGroups.Clear();
