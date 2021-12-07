@@ -2,7 +2,6 @@
 {
     public static class Day07
     {
-
         public static void Main(string[] args)
         {
             int[] crabPositions = File.ReadAllText("input.txt").Split(",").Select(p => int.Parse(p)).ToArray();
@@ -15,14 +14,6 @@
         }
     }
 
-    public class Crab
-    {
-        public int Position { get; set; }
-        public Crab(int position)
-        {
-            Position = position;
-        }
-    }
     public class crabGroup
     {
         public int[] Crabs { get; set; }
@@ -40,9 +31,7 @@
             }
             if (step2FuelConsumption)
             {
-
                 return fuelConsumption;
-
             }
             else
             {
@@ -82,7 +71,6 @@
                 crabData += $"{crab}, ";
             }
             return crabData;
-
         }
     }
 }
