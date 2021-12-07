@@ -7,7 +7,7 @@
             int[] crabPositions = File.ReadAllText("input.txt").Split(",").Select(p => int.Parse(p)).ToArray();
             crabGroup myCrabs = new crabGroup(crabPositions);
             Console.WriteLine(myCrabs);
-            (int position, int fuelcost) = myCrabs.getBestPosition();
+            (int position, long fuelcost) = myCrabs.getBestPosition();
             Console.WriteLine($"Best position: {position}, fuelcost: {fuelcost}");
         }
     }
@@ -19,35 +19,49 @@
         {
             Position = position;
         }
+        
+        
     }
     public class crabGroup
     {
-        public IEnumerable<Crab> Crabs { get; set; }
+        public int[] Crabs { get; set; }
 
         public crabGroup(int[] crabPositions)
         {
-            Crabs = crabPositions.Select(c => new Crab(c)).ToArray();
+            Crabs = crabPositions;
         }
-        public (int, int) getBestPosition()
+        private int fuelConsumption(int distance)
+        {
+            int fuelConsumption=0;
+            for(int y = 1; y <=distance; y++)
+            {
+                fuelConsumption+=y;
+            }
+            return fuelConsumption;
+        }
+        public (int, long) getBestPosition()
         {
             int thisPosition = 0;
-            int fuelCost = int.MaxValue;
+            long fuelCost = long.MaxValue;
             int bestPosition = 0;
-            foreach (var crab in Crabs)
+            int maxPosition = Crabs.Max();
+            int minPosition = Crabs.Min();
+            
+            for(int x = minPosition; x<=maxPosition; x++)
             {
-                int loopFuelCost = 0;
-                thisPosition = crab.Position;
-                foreach (var innerCrab in Crabs)
+                long loopFuelCost = 0;
+                thisPosition = x;
+                foreach (var crab in Crabs)
                 {
-                    loopFuelCost += Math.Abs(innerCrab.Position - thisPosition);
+                    loopFuelCost += fuelConsumption(Math.Abs(x - crab));
                 }
                 if (loopFuelCost < fuelCost)
                 {
                     bestPosition = thisPosition;
-                    fuelCost=loopFuelCost;
+                    fuelCost = loopFuelCost;
                 }
             }
-            return (bestPosition,fuelCost);
+            return (bestPosition, fuelCost);
         }
 
 
@@ -57,7 +71,7 @@
             string crabData = string.Empty;
             foreach (var crab in Crabs)
             {
-                crabData += $"{crab.Position}, ";
+                crabData += $"{crab}, ";
             }
             return crabData;
 
