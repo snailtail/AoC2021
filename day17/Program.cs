@@ -8,9 +8,9 @@ Console.WriteLine($"{targetArea.x1}, {targetArea.x2}, {targetArea.y1}, {targetAr
 
 
 
-for (int x = 0; x<256; x++)
+for (int x = 1; x<targetArea.x2; x++)
 {
-    for (int y = 0; y<256;y++)
+    for (int y = targetArea.x2; y > 0 ;y--)
     {
         var myProbe = new Probe(x, y);
         while (!passedTargetArea(myProbe))
