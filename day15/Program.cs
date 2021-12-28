@@ -50,7 +50,7 @@
             }
 
             map = _mapPart2;
-            return computeDijkstra(map);// - 1;
+            return computeDijkstra(map);
         }
 
         private static long computeDijkstra(Vertex[][] Map)
