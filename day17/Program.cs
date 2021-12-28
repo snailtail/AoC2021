@@ -1,6 +1,7 @@
 ﻿string[] targetareadata = File.ReadAllText("input.txt")[13..].Split(", ");
 int maxYVelocity = int.MinValue;
 int MaxY = int.MinValue;
+Dictionary<string, bool> ValidVelocitySetups = new();
 var targetArea = new Area(targetareadata);
 Console.WriteLine(targetareadata[0]);
 Console.WriteLine(targetareadata[1]);
@@ -8,9 +9,9 @@ Console.WriteLine($"{targetArea.x1}, {targetArea.x2}, {targetArea.y1}, {targetAr
 
 
 
-for (int x = 1; x<targetArea.x2; x++)
+for (int x = 1; x < 512; x++)
 {
-    for (int y = targetArea.x2; y > 0 ;y--)
+    for (int y = 512; y > -512; y--)
     {
         var myProbe = new Probe(x, y);
         while (!passedTargetArea(myProbe))
@@ -22,14 +23,19 @@ for (int x = 1; x<targetArea.x2; x++)
                 break;
             }
         }
-        if (inTargetArea(myProbe) && myProbe.initialVelocityY > maxYVelocity)
+        if (inTargetArea(myProbe))
         {
-            maxYVelocity = myProbe.initialVelocityY;
-            MaxY = myProbe.MaxY;
+            ValidVelocitySetups.TryAdd($"{myProbe.initialVelocityX},{myProbe.initialVelocityY}",true);
+            if (myProbe.initialVelocityY > maxYVelocity)
+            {
+                maxYVelocity = myProbe.initialVelocityY;
+                MaxY = myProbe.MaxY;
+            }
         }
     }
 }
 Console.WriteLine($"Max Initial Velocity Y: {maxYVelocity}. Max Y reached in this trajectory: {MaxY}");
+Console.WriteLine($"Step 2: Number of valid setup velocities: {ValidVelocitySetups.Count}");
 
 
 bool inTargetArea(Probe probe)
@@ -54,7 +60,7 @@ bool passedTargetArea(Probe probe)
     {
         return false;
     }
-    
+
 }
 
 
@@ -64,7 +70,7 @@ public class Area
     public int x2 { get; private set; }
     public int y1 { get; private set; }
     public int y2 { get; private set; }
-    
+
 
     public Area(string[] AreaData)
     {
@@ -117,14 +123,14 @@ public class Probe
         }
 
         VelocityY--;
-        if(Y>MaxY)
+        if (Y > MaxY)
         {
             MaxY = Y;
         }
     }
     public void MoveStep(int Count)
     {
-        for(int n = 0; n < Count; n++)
+        for (int n = 0; n < Count; n++)
         {
             MoveStep();
         }
