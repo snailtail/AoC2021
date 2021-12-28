@@ -2,7 +2,7 @@
 {
     public class Day15
     {
-        private static string inputFile = "sample.txt";
+        private static string inputFile = "input.txt";
         private static readonly Vertex[][] _mapPart1 = File.ReadAllLines(inputFile)
                 .Where(l => !string.IsNullOrEmpty(l))
                 .Select((r, i) => r
@@ -10,6 +10,7 @@
                     .ToArray())
                 .ToArray();
         private static Vertex[][] _mapPart2;
+        private static Vertex[][] map;
 
         public static void Main(string[] args)
         {
@@ -19,8 +20,8 @@
 
         public static long Part1()
         {
-            
-            return computeDijkstra(_mapPart1);
+            map = _mapPart1;
+            return computeDijkstra(map);
         }
 
         public static long Part2()
@@ -48,8 +49,8 @@
                 }
             }
 
-            //_map = _mapPart2;
-            return computeDijkstra(_mapPart2) - 1;
+            map = _mapPart2;
+            return computeDijkstra(map);// - 1;
         }
 
         private static long computeDijkstra(Vertex[][] Map)
@@ -90,7 +91,7 @@
             var neighbors = new List<Vertex>();
 
             //up
-            if (y > 0 && Map[y - 1][x].unProcessed)
+            if (y > 0 && !Map[y - 1][x].unProcessed)
             {
                 neighbors.Add(Map[y - 1][x]);
             }
