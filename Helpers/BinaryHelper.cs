@@ -3,6 +3,11 @@ namespace AdventOfCode.Helpers
 {
     public class BinaryHelper
     {
+
+        /// <summary>
+        /// Takes in a character array representing a binary number.
+        /// Returns a long representing the number.
+        /// </summary>
         public long ConvertBinaryStringToLong(char[] binaryCharArray)
         {
             long returnValue = 0;
@@ -26,6 +31,9 @@ namespace AdventOfCode.Helpers
             return returnValue;
         }
 
+        /// <summary>
+        /// Takes a long and converts it to a string representing the number in binary form.
+        /// </summary>
         public string ConvertLongToBinaryString(long number, int length)
         {
             const int mask = 1;
